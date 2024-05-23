@@ -18,6 +18,8 @@ services:
       - "${CERTBOT_EMAIL}"
       - "-d"
       - "${CERTBOT_DOMAIN}"
+      - "--cert-name"
+      - "cerbot_ssl"
     environment:
       - CERTBOT_EMAIL
       - CERTBOT_DOMAIN
