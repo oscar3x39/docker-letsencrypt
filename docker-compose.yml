@@ -2,24 +2,22 @@ version: '3.2'
 
 services:
 
-  letsencrypt-first:
-    image: certbot/certbot:latest
-    container_name: letsencrypt-first
-    working_dir: /opt/certbot
-    entrypoint: ["certbot"]
-    command:
-      - "echo 2 | -ti certbot/certbot certonly --email $CERTBOT_EMAIL --agree-tos --non-interactive --webroot -w /html -d $CERTBOT_DOMAIN"
-    volumes:
-      - ./cert:/etc/letsencrypt
-
   letsencrypt-renew:
     image: certbot/certbot:latest
     container_name: letsencrypt-renew
     working_dir: /opt/certbot
     entrypoint: ["certbot"]
     command:
-      - "-ti certbot/certbot renew"
+      - "renew"
+      - "--webroot"
+      - "-w"
+      - "${WEB_ROOT}"
+      - "--non-interactive"
+      - "--agree-tos"
+      - "--email"
+      - "${CERTBOT_EMAIL}"
+      - "-d"
+      - "${CERTBOT_DOMAIN}"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - ./logs:/var/log/letsencrypt
-      - ${WEB_ROOT}:/html
