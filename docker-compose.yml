@@ -18,8 +18,7 @@ services:
       - "${CERTBOT_EMAIL}"
       - "-d"
       - "${CERTBOT_DOMAIN}"
-      - "-v"
-      - "${WEB_ROOT}:/html"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - ./logs:/var/log/letsencrypt
+      - ${WEB_ROOT}:/html
