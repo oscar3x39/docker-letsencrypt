@@ -20,4 +20,6 @@ services:
     command:
       - "-ti certbot/certbot renew"
     volumes:
-      - ./cert:/etc/letsencrypt
+      - /etc/letsencrypt:/etc/letsencrypt
+      - ./logs:/var/log/letsencrypt
+      - ${WEB_ROOT}:/html
