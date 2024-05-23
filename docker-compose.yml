@@ -8,7 +8,7 @@ services:
     working_dir: /opt/certbot
     entrypoint: ["certbot"]
     command:
-      - "renew"
+      - "certonly"
       - "--webroot"
       - "-w"
       - "/html"
@@ -18,6 +18,9 @@ services:
       - "${CERTBOT_EMAIL}"
       - "-d"
       - "${CERTBOT_DOMAIN}"
+    environment:
+      - CERTBOT_EMAIL
+      - CERTBOT_DOMAIN
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - ./logs:/var/log/letsencrypt
